@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filter\Filters;
+namespace App\Filters;
 
 use Illuminate\Support\Facades\Auth;
 
