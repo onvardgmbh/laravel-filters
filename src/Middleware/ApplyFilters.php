@@ -25,16 +25,18 @@ class ApplyFilters extends Filter
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(\Illuminate\Http\Request $request, \Closure $next)
     {
         // Get Route's Actions
         $action = $request->route()->getAction();
 
-        // Apply 'Before' Filters
-        foreach($action['filter']['before'] as $key => $value) {
-            if(is_string($value)) {
-                if( function_exists( parent::$value() ) ) {
-                    $this->$value();
+        if(isset($action['filter']['before'])) {
+            // Apply 'Before' Filters
+            foreach ($action['filter']['before'] as $key => $value) {
+                if (is_string($value)) {
+                    if (function_exists(parent::$value())) {
+                        $this->$value();
+                    }
                 }
             }
         }
@@ -42,11 +44,13 @@ class ApplyFilters extends Filter
         // Handle Request
         $this->response = $next($request);
 
-        // Apply 'After' Filters
-        foreach($action['filter']['after'] as $key => $value) {
-            if(is_string($value)) {
-                if( function_exists( parent::$value() ) ) {
-                    $this->$value();
+        if(isset($action['filter']['after'])) {
+            // Apply 'After' Filters
+            foreach ($action['filter']['after'] as $key => $value) {
+                if (is_string($value)) {
+                    if (function_exists(parent::$value())) {
+                        $this->$value();
+                    }
                 }
             }
         }
