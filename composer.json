@@ -3,7 +3,9 @@
     "description": "Filters for Laravel >=5.2",
     "keywords": [
         "laravel","filter","filters"
-    ],
+    ],    
+    "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "Onvard GmbH",
